@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const RECEIVE_TASKS = 'RECEIVE_TASKS';
+export const UPDATE_FORM_VALUES = 'UPDATE_FORM_VALUES';
+export const CLEAR_FORM_VALUES = 'CLEAR_FORM_VALUES';
