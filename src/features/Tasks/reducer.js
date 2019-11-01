@@ -1,4 +1,9 @@
-import { RECEIVE_TASKS, UPDATE_FORM_VALUES, CLEAR_FORM_VALUES } from './types';
+import {
+  RECEIVE_TASKS,
+  UPDATE_FORM_VALUES,
+  CLEAR_FORM_VALUES,
+  SET_PAGE,
+} from './types';
 
 export const initialState = {
   tasks: [],
@@ -7,6 +12,8 @@ export const initialState = {
     email: '',
     text: '',
   },
+  tasksTotalCount: 0,
+  currentPage: 1,
 };
 
 export default function tasksReducer(state = initialState, action) {
@@ -14,7 +21,8 @@ export default function tasksReducer(state = initialState, action) {
     case RECEIVE_TASKS:
       return {
         ...state,
-        tasks: action.payload,
+        tasks: action.payload.tasks,
+        tasksTotalCount: action.payload.total_task_count,
       };
 
     case UPDATE_FORM_VALUES:
@@ -34,6 +42,12 @@ export default function tasksReducer(state = initialState, action) {
           email: '',
           text: '',
         },
+      };
+
+    case SET_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
       };
 
     default:

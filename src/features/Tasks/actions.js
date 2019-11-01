@@ -1,4 +1,9 @@
-import { RECEIVE_TASKS, UPDATE_FORM_VALUES, CLEAR_FORM_VALUES } from './types';
+import {
+  RECEIVE_TASKS,
+  UPDATE_FORM_VALUES,
+  CLEAR_FORM_VALUES,
+  SET_PAGE,
+} from './types';
 
 export const receiveTasks = (payload) => ({
   type: RECEIVE_TASKS,
@@ -15,10 +20,16 @@ export const clearFormValues = (payload) => ({
   payload,
 });
 
-export const fetchTasks = () => (dispatch, state, api) => (
-  api('/', 'get')
+export const setPage = (payload) => ({
+  type: SET_PAGE,
+  payload,
+});
+
+export const fetchTasks = (page = 1) => (dispatch, state, api) => (
+  api(`?page=${page}`, 'get')
     .then((response) => {
-      dispatch(receiveTasks(response.data.message.tasks));
+      dispatch(receiveTasks(response.data.message));
+      dispatch(setPage(page));
     })
 );
 
