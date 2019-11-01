@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import TasksList from './component';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 
 
 export class TasksListContainer extends React.Component {
