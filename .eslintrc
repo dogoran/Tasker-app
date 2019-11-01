@@ -15,6 +15,7 @@
     "react-hooks"
   ],
   "rules": {
+    "react/jsx-props-no-spreading": [0],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "linebreak-style": "off",
