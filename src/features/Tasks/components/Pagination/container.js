@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { ITEMS_PER_PAGE } from 'constants/constants';
+
 import Pagination from './component';
 import { fetchTasks } from '../../actions';
-import { ITEMS_PER_PAGE } from '../../../../constants/constants';
 
 class PaginationContainer extends Component {
   handlePageChange = (page) => {

@@ -13,6 +13,7 @@ export const initialState = {
     username: '',
     email: '',
     text: '',
+    errors: {},
   },
   tasksTotalCount: 0,
   currentPage: 1,
@@ -45,6 +46,7 @@ export default function tasksReducer(state = initialState, action) {
           username: '',
           email: '',
           text: '',
+          errors: {},
         },
       };
 
