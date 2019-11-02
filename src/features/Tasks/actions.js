@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 import {
   RECEIVE_TASKS,
   UPDATE_FORM_VALUES,
@@ -79,6 +81,10 @@ export const createTaskThunk = (body) => (dispatch, state, api) => (
       if (response.data.status !== 'error') {
         dispatch(fetchTasks());
         dispatch(clearFormValues());
+
+        toast.success('Task created!');
+      } else {
+        toast.error('Server responded with error');
       }
     })
 );
@@ -90,6 +96,10 @@ export const editTaskThunk = (taskId, body) => (dispatch, state, api) => (
         dispatch(fetchTasks());
         dispatch(clearEditFormValues());
         dispatch(closeEditForm());
+
+        toast.success('Task updated!');
+      } else {
+        toast.error('Server responded with error');
       }
     })
 );

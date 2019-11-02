@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'ramda';
+import { toast } from 'react-toastify';
 
 import { validateTaskForm } from 'utils/validation';
 import { getCookie, isTokenValid } from 'utils/cookie';
@@ -37,7 +38,11 @@ export class TaskItemContainer extends React.Component {
     event.preventDefault();
 
     if (!isTokenValid()) {
+      this.props.closeEditForm();
       this.props.history.push('/login');
+      toast.warn('You should login as admin to update this task');
+
+      return;
     }
 
     const validationErrors = validateTaskForm(this.props.formValues, 'EDIT_TASK');
