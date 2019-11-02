@@ -8,7 +8,12 @@ import * as actions from '../../actions';
 
 export class TasksListContainer extends React.Component {
   componentDidMount() {
-    this.props.fetchTasks();
+    if (this.props.match
+      && +this.props.match.params.page !== this.props.currentPage) {
+      this.props.fetchTasks(this.props.match.params.page);
+    } else {
+      this.props.fetchTasks();
+    }
   }
 
   render() {
@@ -21,6 +26,11 @@ export class TasksListContainer extends React.Component {
 }
 
 TasksListContainer.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      page: PropTypes.string,
+    }),
+  }).isRequired,
   tasks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     username: PropTypes.string,
@@ -29,10 +39,12 @@ TasksListContainer.propTypes = {
     status: PropTypes.number,
   })).isRequired,
   fetchTasks: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   tasks: state.tasks.tasks,
+  currentPage: state.tasks.currentPage,
 });
 
 const mapDispatchToProps = {

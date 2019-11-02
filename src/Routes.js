@@ -7,6 +7,7 @@ import Tasks from './features/Tasks';
 const Routes = () => (
   <Switch>
     <Route exact path="/login" component={LoginPage} />
+    <Route path="/page/:page" component={Tasks} />
     <Route path="/" component={Tasks} />
   </Switch>
 );

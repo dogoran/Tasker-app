@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 
@@ -16,11 +17,14 @@ const PaginationComponent = ({ page, onPageChange, currentPage }) => {
   return (
     <li
       className={paginationItemClassList}
-      onClick={() => onPageChange(page)}
     >
-      <span className="page-link">
+      <Link
+        className="page-link"
+        to={`/page/${page}`}
+        onClick={() => onPageChange(page)}
+      >
         {page}
-      </span>
+      </Link>
     </li>
   );
 };

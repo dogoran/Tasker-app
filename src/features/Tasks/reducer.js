@@ -74,7 +74,7 @@ export default function tasksReducer(state = initialState, action) {
     case SET_PAGE:
       return {
         ...state,
-        currentPage: action.payload,
+        currentPage: +action.payload,
       };
 
     case SET_SORT_TYPE:
