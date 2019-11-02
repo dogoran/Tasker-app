@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { setCookie, isTokenValid } from 'utils/cookie';
@@ -16,9 +16,9 @@ const Navbar = (props) => {
 
   return (
     <nav className="navbar navbar-dark navbar-expand-lg bg-dark">
-      <div className="navbar-brand mr-auto">
+      <Link className="navbar-brand mr-auto" to="/">
         Tasker-app
-      </div>
+      </Link>
       <ul className="navbar-nav">
         <li className="nav-item">
           {

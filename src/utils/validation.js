@@ -14,8 +14,12 @@ export const validateTaskForm = (formData, formType) => {
     }
   }
 
-  if (!formData.username) {
+  if (formType !== 'EDIT_TASK' && !formData.username) {
     errors.username = constants.USERNAME_IS_REQUIRED_MESSAGE;
+  }
+
+  if (formType === 'EDIT_TASK' && ![0, 10].includes(+formData.status)) {
+    errors.status = true;
   }
 
   if (formType !== 'LOGIN_FORM' && !formData.text) {

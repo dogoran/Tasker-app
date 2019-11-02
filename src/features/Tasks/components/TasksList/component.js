@@ -8,6 +8,7 @@ const TasksListComponent = (props) => (
     {
       props.tasks.map((task) => (
         <TaskItem
+          {...props}
           key={task.id}
           task={task}
         />

@@ -5,6 +5,10 @@ import {
   SET_PAGE,
   SET_SORT_TYPE,
   SET_SORT_DIRECTION,
+  UPDATE_EDIT_FORM_VALUES,
+  CLEAR_EDIT_FORM_VALUES,
+  OPEN_EDIT_FORM,
+  CLOSE_EDIT_FORM,
 } from './types';
 
 export const initialState = {
@@ -15,10 +19,17 @@ export const initialState = {
     text: '',
     errors: {},
   },
+  editTaskFormValues: {
+    state: 0,
+    text: '',
+    errors: {},
+  },
   tasksTotalCount: 0,
   currentPage: 1,
   sortType: 'id',
   sortDirection: 'asc',
+  taskInEdit: 0,
+  isEditFormOpen: false,
 };
 
 export default function tasksReducer(state = initialState, action) {
@@ -39,15 +50,25 @@ export default function tasksReducer(state = initialState, action) {
         },
       };
 
+    case UPDATE_EDIT_FORM_VALUES:
+      return {
+        ...state,
+        editTaskFormValues: {
+          ...state.editTaskFormValues,
+          ...action.payload,
+        },
+      };
+
     case CLEAR_FORM_VALUES:
       return {
         ...state,
-        formValues: {
-          username: '',
-          email: '',
-          text: '',
-          errors: {},
-        },
+        formValues: { ...initialState.formValues },
+      };
+
+    case CLEAR_EDIT_FORM_VALUES:
+      return {
+        ...state,
+        editTaskFormValues: { ...initialState.editTaskFormValues },
       };
 
     case SET_PAGE:
@@ -66,6 +87,24 @@ export default function tasksReducer(state = initialState, action) {
       return {
         ...state,
         sortDirection: action.payload,
+      };
+
+    case OPEN_EDIT_FORM:
+      return {
+        ...state,
+        isEditFormOpen: true,
+        taskInEdit: action.payload,
+        editTaskFormValues: {
+          ...state.editTaskFormValues,
+          ...state.tasks.find((task) => task.id === action.payload),
+        },
+      };
+
+    case CLOSE_EDIT_FORM:
+      return {
+        ...state,
+        isEditFormOpen: false,
+        taskInEdit: 0,
       };
 
     default:
