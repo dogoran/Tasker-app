@@ -3,11 +3,18 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { isTokenValid } from 'utils/cookie';
+import { escapeHtml } from 'constants/constants';
 
 import styles from './styles.module.scss';
 
 const TaskItemComponent = (props) => {
-  const { task, isEditFormOpen, formValues } = { ...props };
+  const { isEditFormOpen, formValues } = { ...props };
+  const task = {
+    ...props.task,
+    text: escapeHtml(props.task.text),
+    username: escapeHtml(props.task.username),
+  };
+
   const groupItemClassList = classNames('list-group-item', styles.item);
   const buttonClassList = classNames('btn btn-sm btn-secondary', styles.controlButton);
   const textAreaClassList = classNames(
@@ -66,14 +73,14 @@ const TaskItemComponent = (props) => {
             <>
               <textarea
                 className={textAreaClassList}
-                value={formValues.text}
+                value={escapeHtml(formValues.text)}
                 onChange={props.onTextChange}
               />
             </>
           )
           : (
             <p className={styles.text}>
-              {task.text}
+              {escapeHtml(task.text)}
             </p>
           )
       }

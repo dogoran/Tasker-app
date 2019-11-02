@@ -6,6 +6,18 @@ export const ITEMS_PER_PAGE = 3;
 // eslint-disable-next-line no-useless-escape
 export const emailValidateRegexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+export const escapeHtml = (text) => {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  };
+
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+};
+
 export const INVALID_EMAIL_MESSAGE = 'Incorrect email';
 export const EMAIL_IS_REQUIRED_MESSAGE = 'Email is required';
 export const USERNAME_IS_REQUIRED_MESSAGE = 'Username is required';
