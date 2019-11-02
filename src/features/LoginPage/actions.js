@@ -1,3 +1,5 @@
+import { setCookie } from 'utils/cookie';
+
 import {
   LOGIN_SUCCESS,
   UPDATE_FORM_VALUES,
@@ -17,6 +19,9 @@ export const fetchLogin = (user) => (dispatch, state, api) => (
   api('login/', 'post', user)
     .then((response) => response.data)
     .then((data) => {
-      dispatch(login(data.message));
+      if (data.status !== 'error') {
+        setCookie(data.message, 86400);
+        dispatch(login(true));
+      }
     })
 );
