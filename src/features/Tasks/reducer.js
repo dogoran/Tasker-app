@@ -38,7 +38,7 @@ export default function tasksReducer(state = initialState, action) {
       return {
         ...state,
         tasks: action.payload.tasks,
-        tasksTotalCount: action.payload.total_task_count,
+        tasksTotalCount: +action.payload.total_task_count,
       };
 
     case UPDATE_FORM_VALUES:
