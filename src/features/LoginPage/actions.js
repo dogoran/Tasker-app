@@ -22,6 +22,8 @@ export const fetchLogin = (user) => (dispatch, state, api) => (
       if (data.status !== 'error') {
         setCookie(data.message, 86400);
         dispatch(login(true));
+      } else {
+        dispatch(updateFormValues({ errors: data.message }));
       }
     })
 );
