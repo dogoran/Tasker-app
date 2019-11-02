@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'ramda';
 
+import { validateTaskForm } from 'utils/validation';
+
 import TaskFormComponent from './component';
 import { createTaskThunk, updateFormValues } from '../../actions';
-import { validateTaskForm } from './validation';
 
 export class TaskFormContainer extends React.Component {
   handleUsernameChange = (event) => {
@@ -23,7 +24,7 @@ export class TaskFormContainer extends React.Component {
   handleCreateTask = (event) => {
     event.preventDefault();
 
-    const validationErrors = validateTaskForm(this.props.formValues);
+    const validationErrors = validateTaskForm(this.props.formValues, 'CREATE_TASK');
 
     this.props.updateFormValues({ errors: validationErrors });
 
