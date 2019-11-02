@@ -4,11 +4,18 @@ import PropTypes from 'prop-types';
 import { isEmpty } from 'ramda';
 
 import { validateTaskForm } from 'utils/validation';
+import { isTokenValid } from 'utils/cookie';
 
 import LoginFormComponent from './component';
 import { fetchLogin, updateFormValues } from '../../actions';
 
 export class LoginFormContainer extends React.Component {
+  componentDidUpdate() {
+    if (isTokenValid()) {
+      this.props.history.push('/');
+    }
+  }
+
   handleUsernameChange = (event) => {
     this.props.updateFormValues({ username: event.target.value });
   };
@@ -52,6 +59,9 @@ LoginFormContainer.propTypes = {
   formValues: PropTypes.shape({
     username: PropTypes.string,
     password: PropTypes.string,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }).isRequired,
   fetchLogin: PropTypes.func.isRequired,
   updateFormValues: PropTypes.func.isRequired,

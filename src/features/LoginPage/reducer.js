@@ -18,6 +18,7 @@ export default function loginReducer(state = initialState, action) {
       return {
         ...state,
         isLogged: true,
+        formValues: initialState.formValues,
       };
 
     case UPDATE_FORM_VALUES:
