@@ -3,11 +3,15 @@ import { setCookie } from 'utils/cookie';
 import {
   LOGIN_SUCCESS,
   UPDATE_FORM_VALUES,
+  LOGOUT,
 } from './types';
 
-export const login = (payload) => ({
+export const login = () => ({
   type: LOGIN_SUCCESS,
-  payload,
+});
+
+export const logout = () => ({
+  type: LOGOUT,
 });
 
 export const updateFormValues = (payload) => ({
@@ -21,7 +25,7 @@ export const fetchLogin = (user) => (dispatch, state, api) => (
     .then((data) => {
       if (data.status !== 'error') {
         setCookie(data.message, 86400);
-        dispatch(login(true));
+        dispatch(login());
       } else {
         dispatch(updateFormValues({ errors: data.message }));
       }

@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 import Pagination from './components/Pagination';
 import Filter from './components/Filter';
 
-const Tasks = (props) => console.log(props) || (
+const Tasks = () => (
   <>
     <div className={styles.taskFormWrapper}>
       <TaskForm />

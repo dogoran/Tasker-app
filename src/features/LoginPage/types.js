@@ -1,2 +1,3 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const UPDATE_FORM_VALUES = 'UPDATE_FORM_VALUES';
+export const LOGOUT = 'LOGOUT';
