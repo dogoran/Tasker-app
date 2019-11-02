@@ -3,6 +3,8 @@ import {
   UPDATE_FORM_VALUES,
   CLEAR_FORM_VALUES,
   SET_PAGE,
+  SET_SORT_TYPE,
+  SET_SORT_DIRECTION,
 } from './types';
 
 export const initialState = {
@@ -14,6 +16,8 @@ export const initialState = {
   },
   tasksTotalCount: 0,
   currentPage: 1,
+  sortType: 'id',
+  sortDirection: 'asc',
 };
 
 export default function tasksReducer(state = initialState, action) {
@@ -48,6 +52,18 @@ export default function tasksReducer(state = initialState, action) {
       return {
         ...state,
         currentPage: action.payload,
+      };
+
+    case SET_SORT_TYPE:
+      return {
+        ...state,
+        sortType: action.payload,
+      };
+
+    case SET_SORT_DIRECTION:
+      return {
+        ...state,
+        sortDirection: action.payload,
       };
 
     default:

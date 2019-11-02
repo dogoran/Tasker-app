@@ -3,6 +3,8 @@ import {
   UPDATE_FORM_VALUES,
   CLEAR_FORM_VALUES,
   SET_PAGE,
+  SET_SORT_TYPE,
+  SET_SORT_DIRECTION,
 } from './types';
 
 export const receiveTasks = (payload) => ({
@@ -25,16 +27,31 @@ export const setPage = (payload) => ({
   payload,
 });
 
-export const fetchTasks = (page = 1) => (dispatch, state, api) => (
-  api(`?page=${page}`, 'get')
-    .then((response) => {
-      dispatch(receiveTasks(response.data.message));
-      dispatch(setPage(page));
-    })
-);
+export const setSortType = (payload) => ({
+  type: SET_SORT_TYPE,
+  payload,
+});
+
+export const setSortDirection = (payload) => ({
+  type: SET_SORT_DIRECTION,
+  payload,
+});
+
+export const fetchTasks = (page = 0) => (dispatch, state, api) => {
+  const updatedPage = page || state().tasks.currentPage;
+  const query = `?page=${updatedPage}&sort_field=${state().tasks.sortType}&sort_direction=${state().tasks.sortDirection}`;
+
+  return (
+    api(query, 'get')
+      .then((response) => {
+        dispatch(receiveTasks(response.data.message));
+        dispatch(setPage(updatedPage));
+      })
+  );
+};
 
 export const createTaskThunk = (body) => (dispatch, state, api) => (
-  api('create', 'post', body)
+  api('create/', 'post', body)
     .then((response) => {
       if (response.data.status !== 'error') {
         dispatch(fetchTasks());
