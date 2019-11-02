@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { isEmpty } from 'ramda';
 
 import { validateTaskForm } from 'utils/validation';
-import { getCookie } from 'utils/cookie';
+import { getCookie, isTokenValid } from 'utils/cookie';
 
 import TaskItemComponent from './component';
 import {
@@ -35,6 +35,10 @@ export class TaskItemContainer extends React.Component {
 
   handleEdit = (event) => {
     event.preventDefault();
+
+    if (!isTokenValid()) {
+      this.props.history.push('/login');
+    }
 
     const validationErrors = validateTaskForm(this.props.formValues, 'EDIT_TASK');
 
