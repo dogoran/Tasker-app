@@ -2,7 +2,7 @@ import { setCookie } from 'utils/cookie';
 
 import {
   LOGIN_SUCCESS,
-  UPDATE_FORM_VALUES,
+  UPDATE_LOGIN_FORM_VALUES,
   LOGOUT,
 } from './types';
 
@@ -15,7 +15,7 @@ export const logout = () => ({
 });
 
 export const updateFormValues = (payload) => ({
-  type: UPDATE_FORM_VALUES,
+  type: UPDATE_LOGIN_FORM_VALUES,
   payload,
 });
 

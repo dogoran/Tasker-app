@@ -1,6 +1,6 @@
 import {
   LOGIN_SUCCESS,
-  UPDATE_FORM_VALUES,
+  UPDATE_LOGIN_FORM_VALUES,
   LOGOUT,
 } from './types';
 
@@ -29,7 +29,7 @@ export default function loginReducer(state = initialState, action) {
         formValues: initialState.formValues,
       };
 
-    case UPDATE_FORM_VALUES:
+    case UPDATE_LOGIN_FORM_VALUES:
       return {
         ...state,
         formValues: {
